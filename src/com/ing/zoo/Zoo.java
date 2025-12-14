@@ -5,34 +5,68 @@ import java.util.Scanner;
 public class Zoo {
     public static void main(String[] args)
     {
-        String[] commands = new String[4];
-        commands[0] = "hello";
-        commands[1] = "give leaves";
-        commands[2] = "give meat";
-        commands[3] = "perform trick";
+        Animal[] animals = {
+                new Lion("henk"),
+                new Hippo("elsa"),
+                new Pig("dora"),
+                new Tiger("wally"),
+                new Zebra("marty"),
+                new Panda("bobby"),
+                new Rhino("billy")
+        };
 
-        Lion henk = new Lion();
-        henk.name = "henk";
-        Hippo elsa = new Hippo();
-        elsa.name = "elsa";
-        Pig dora = new Pig();
-        dora.name = "dora";
-        Tiger wally = new Tiger();
-        wally.name = "wally";
-        Zebra marty = new Zebra();
-        marty.name = "marty";
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Voer uw command in: ");
+        String input = scanner.nextLine().toLowerCase();
+        String[] parts = input.split(" ");
 
-        String input = scanner.nextLine();
-        if(input.equals(commands[0] + " henk"))
-        {
-            henk.sayHello();
+        if (parts[0].equals("hello")) {
+            if (parts.length == 1) {
+                for (Animal a : animals) {
+                    a.sayHello();
+                }
+            } else {
+                for (Animal a : animals) {
+                    if (a.getName().equals(parts[1])) {
+                        a.sayHello();
+                    }
+                }
+            }
+            return;
         }
-        else
-        {
-            System.out.println("Unknown command: " + input);
+
+        // Giving leaves(pig joins in on the first feeding)
+        if (input.equals("give leaves")) {
+            for (Animal a : animals) {
+                if (a instanceof Herbivore) {
+                    ((Herbivore)a).eatLeaves();
+                }
+                if (a instanceof Omnivore) {
+                    ((Omnivore)a).eatLeaves();
+                }
+            }
+    }
+
+        // giving meat
+        if (input.equals("give meat")) {
+            for (Animal a : animals) {
+                if (a instanceof Carnivore) {
+                    ((Carnivore) a).eatMeat();
+                }
+            }
+            return;
         }
+
+        // perform circus tricks
+        if (input.equals("perform trick")) {
+            for (Animal a : animals) {
+                a.performTrick();
+            }
+            return;
+        }
+
+        // unknown
+        System.out.println("Unknown command: " + input);
     }
 }
