@@ -1,23 +1,30 @@
 package com.ing.zoo;
 
-public class Hippo {
-    public String name;
-    public String helloText;
-    public String eatText;
+import java.util.Random;
 
-    public Hippo()
-    {
+public class Hippo extends Herbivore {
+
+    public Hippo(String name) {
+        super(name);
     }
 
-    public void sayHello()
-    {
-        helloText = "splash";
-        System.out.println(helloText);
+    @Override
+    public void sayHello() {
+        say("splash");
     }
 
-    public void eatLeaves()
-    {
-        eatText = "munch munch lovely";
-        System.out.println(eatText);
+    @Override
+    public void eatLeaves() {
+        say("munch munch lovely");
+    }
+
+    @Override
+    public void performTrick() {
+        Random random = new Random();
+        if (random.nextInt(2) == 0) {
+            say("Splashes around in the water");
+        } else {
+            say("Belly flops into the water");
+        }
     }
 }

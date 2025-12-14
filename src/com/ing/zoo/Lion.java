@@ -1,23 +1,29 @@
 package com.ing.zoo;
+import java.util.Random;
 
-public class Lion {
-    public String name;
-    public String helloText;
-    public String eatText;
+public class Lion extends Carnivore {
 
-    public Lion()
-    {
+    public Lion(String name) {
+        super(name);
     }
 
-    public void sayHello()
-    {
-        helloText = "roooaoaaaaar";
-        System.out.println(helloText);
+    @Override
+    public void sayHello() {
+        say("roooaaarrr");
     }
 
-    public void eatMeat()
-    {
-        eatText = "nomnomnom thx mate";
-        System.out.println(eatText);
+    @Override
+    public void eatMeat() {
+        say("nomnomnom thx mate");
+    }
+
+    @Override
+    public void performTrick() {
+        Random random = new Random();
+        if (random.nextInt(2) == 0) {
+            say("Shows off his beautiful mane");
+        } else {
+            say("Starts scratching against a tree");
+        }
     }
 }
